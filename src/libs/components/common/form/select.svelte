@@ -3,24 +3,25 @@
     export let label: string;
     export let key: string;
     export let fullWidth: boolean;
-    export let width = 'col-12';
     export let element: unknown;
 </script>
 
 <div class="form-control">
     <label for="id-{key}">{label}</label>
-    <input
+    <select
         id="id-{key}"
-        class="border-{color} {color} {fullWidth === true ? 'fullWidth' : width}"
+        class="border-{color} {color} {fullWidth === true ? 'fullWidth' : ''}"
         {...$$restProps}
         on:blur
         on:focus
         bind:value={element}
-    />
+    >
+        <slot></slot>
+    </select>
 </div>
 
 <style>
-    input.fullWidth {
+    select.fullWidth {
         width: 100%;
         box-sizing: border-box;
     }
@@ -48,7 +49,7 @@
         margin-left: 5px;
     }
 
-    input {
+    select {
         font-weight: 400;
         font-size: 0.875rem;
         border-radius: 4px;

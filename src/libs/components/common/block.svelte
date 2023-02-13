@@ -1,23 +1,24 @@
 <script lang="ts">
     export let width = 'col-12';
-    let marginClass = 'no-margin';
+    let margin = 'no-margin';
 
     if (width !== 'col-12') {
-        marginClass = 'margin-auto';
+        margin = 'margin-auto';
     }
-
 </script>
 
-<div class="block {width} {marginClass}" {...$$restProps}>
-    <slot></slot>
+<div class="{width} {margin}" {...$$restProps}>
+    <div class="block">
+        <slot></slot>
+    </div>
 </div>
 
 <style>
     .block {
         background-color: var(--background-card);
         padding: 1rem 1.5rem;
+        margin: 5px;
         border-radius: 15px;
-        max-width: 95%;
     }
 
     .margin-auto {

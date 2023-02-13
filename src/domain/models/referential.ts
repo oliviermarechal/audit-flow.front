@@ -23,7 +23,24 @@ export class Referential implements ReferentialInterface {
         public versions?: ReferentialVersion[],
     ) {}
 
+    public static fromPayload(data: ReferentialInterface) {
+        return new Referential(
+            data.label,
+            data.description,
+            data.id,
+            data.url,
+            data.isPublic,
+            data.ownerId,
+            data.updatedAt,
+            data.versions,
+        )
+    }
+
     public isValidToSubmit(): boolean {
         return !(!this.label || !this.description);
+    }
+
+    public hasId(): boolean {
+        return !!this.id;
     }
 }

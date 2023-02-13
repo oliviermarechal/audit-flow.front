@@ -10,7 +10,7 @@
     .primary {
         background-color: var(--primary);
         border: 1px solid var(--primary);
-        color: var(--text-light);
+        color: var(--background);
     }
 
     .secondary {

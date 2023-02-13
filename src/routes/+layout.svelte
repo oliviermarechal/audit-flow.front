@@ -6,9 +6,9 @@
         --background-black: #191B20;
         --background: #16151a;
         --background-card: #212227;
-        --primary: #b76dff;
+        --primary: #8181DB;
         --secondary: #4bd2bc;
-        --secondary2: #094242;
+        --secondary2: #74dccb;
         --light: #215473;
         --text-light: #FFFFFF;
         --text-dark: #191B20;
@@ -27,22 +27,31 @@
         color: var(--text-light);
     }
 
+    :global(body) {
+        margin: 0;
+        background-color: var(--background);
+    }
+
     :global(.hr-gradient) {
         border: none;
-        height: 2px;
-        background: rgb(183,109,255);
-        background: linear-gradient(90deg, rgba(183,109,255,1) 0%, rgba(9,115,121,1) 45%, rgba(75,210,188,1) 100%);
+        height: 3px;
+        border-radius: 15px;
+        background: var(--primary);
+        background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 55%, var(--secondary2) 100%);
     }
 
     :global(.text-gradient) {
-        background: linear-gradient(to right, var(--primary) 32%, var(--secondary) 100%);
+        background: linear-gradient(to right, var(--text-light) 0%, var(--secondary) 65%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
-    :global(body) {
-        margin: 0;
+    :global(.bg) {
         background-color: var(--background);
+    }
+
+    :global(.bg-card) {
+        background-color: var(--background-card);
     }
 
     :global(.flex) {
@@ -54,6 +63,18 @@
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+    }
+
+    :global(.space-between) {
+        justify-content: space-between;
+    }
+
+    :global(.flex-wrap) {
+        flex-wrap: wrap;
+    }
+
+    :global(.text-center) {
+        text-align: center;
     }
 
     :global(.color-primary) {

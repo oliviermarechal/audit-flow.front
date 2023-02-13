@@ -1,8 +1,9 @@
 <script lang="ts">
     export let color: string;
+    export let type = 'button';
 </script>
 
-<button class="{color}" on:click>
+<button class="{color}" type="{type}" on:click>
     <slot></slot>
 </button>
 

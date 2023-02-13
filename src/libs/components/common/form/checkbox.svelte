@@ -2,6 +2,7 @@
     export let label: string;
     export let color: string;
     export let element: string;
+    export let textHelper: string | null;
 </script>
 
 <div class="form-control">
@@ -11,9 +12,12 @@
             {...$$restProps}
             on:blur
             on:focus
-            bind:value={element}
+            bind:checked={element}
         >
         <span class="checkmark {color}"></span>
+        {#if textHelper}
+            <div><small><i>{textHelper}</i></small></div>
+        {/if}
     </label>
 </div>
 
@@ -50,11 +54,11 @@
         left: 0;
         height: 20px;
         width: 20px;
-        background-color: #eee;
+        background-color: var(--background);
     }
 
     .container:hover input ~ .checkmark {
-        background-color: #ccc;
+        background-color: var(--background);
     }
 
     .container input:checked ~ .checkmark.primary {
@@ -76,11 +80,11 @@
     }
 
     .container .checkmark:after {
-        left: 7px;
+        left: 6px;
         top: 2px;
         width: 5px;
         height: 10px;
-        border: solid white;
+        border: solid var(--background);
         border-width: 0 3px 3px 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);

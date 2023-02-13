@@ -1,5 +1,6 @@
 <script lang="ts">
     import ReferentialForm from '../../../../libs/components/referential/referential-form.svelte'
+    import Block from '../../../../libs/components/common/block.svelte';
 </script>
 
 <svelte:head>
@@ -7,7 +8,10 @@
 </svelte:head>
 
 <div class="ref-form">
-    <ReferentialForm />
+    <Block width="col-6">
+        <h1 class="text-center">Ajouter un référentiel</h1>
+        <ReferentialForm />
+    </Block>
 </div>
 
 
