@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { account } from '../../store/account.store';
+    import { account } from '../../infra/store/account.store';
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
-    import Button from '../../../libs/components/common/button/outlined-button.svelte';
+    import Button from '../common/button/outlined-button.svelte';
 
     const handleLogout = () => {
         account.set(null);
@@ -42,9 +42,10 @@
 <style>
     nav {
         height: 100vh;
-        min-width: 15%;
+        width: 15%;
         color: var(--text-light);
         display: flex;
+        position: fixed;
         flex-direction: column;
         justify-content: space-between;
         background-color: var(--background-card);

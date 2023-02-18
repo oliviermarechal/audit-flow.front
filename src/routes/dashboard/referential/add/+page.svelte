@@ -1,6 +1,6 @@
 <script lang="ts">
-    import ReferentialForm from '../../../../libs/components/referential/referential-form.svelte'
-    import Block from '../../../../libs/components/common/block.svelte';
+    import ReferentialForm from '../../../../view-components/referential/referential-form.svelte'
+    import Block from '../../../../view-components/common/block.svelte';
 </script>
 
 <svelte:head>

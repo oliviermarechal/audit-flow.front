@@ -1,7 +1,8 @@
 <script lang='ts'>
-    import Nav from '../../libs/components/dashboard/nav.svelte';
-    import {account, me} from '../../libs/store/account.store';
+    import Nav from '../../view-components/dashboard/nav.svelte';
+    import { account } from '../../infra/store/account.store';
     import { goto } from '$app/navigation';
+    import { me } from '../../app/actions';
 
     if (!$account) {
         if (typeof localStorage !== 'undefined') {
@@ -27,6 +28,8 @@
 <style>
     .main {
         width: 85%;
+        margin-left: 15%;
+        overflow: auto;
     }
 
     .container {

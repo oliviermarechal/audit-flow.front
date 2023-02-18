@@ -1,17 +1,19 @@
 <script lang="ts">
-    import {referentials, FetchReferentials} from '../../../libs/store/referential.store';
-    import Button from '../../../libs/components/common/button/outlined-button.svelte';
+    import {referentials} from '../../../infra/store/referential.store';
+    import Button from '../../../view-components/common/button/outlined-button.svelte';
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
-    import OutlinedButton from '../../../libs/components/common/button/outlined-button.svelte';
+    import OutlinedButton from '../../../view-components/common/button/outlined-button.svelte';
+    import {fetchReferentials} from '../../../app/actions';
 
     onMount(() => {
-        FetchReferentials();
+        fetchReferentials();
     });
 
     const goToReferential = (id: string) => {
         goto(`/dashboard/referential/${id}`);
     }
+
 </script>
 
 <svelte:head>

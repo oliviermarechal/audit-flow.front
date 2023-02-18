@@ -5,12 +5,11 @@
     import VersionForm from '../../../../../../view-components/referential/version/version-form.svelte';
     import Block from '../../../../../../view-components/common/block.svelte';
     import {goto} from '$app/navigation';
-    import {fetchReferentials} from '../../../../../../app/actions';
+    import {ReferentialVersion} from '../../../../../../domain';
+    import {fetchReferentials, createVersion} from '../../../../../../app/actions';
 
     let referentialId = $page.params.id;
-    let versionId = $page.params.versionId;
     let referential;
-    let version;
 
     onMount(async () => {
         referential = $referentials.find(f => f.id === referentialId);
@@ -18,12 +17,17 @@
             await fetchReferentials();
             referential = $referentials.find(f => f.id === referentialId);
         }
-
-        version = referential.versions.find(v => v.id === versionId)
     });
 
     const onCancel = () => {
         goto(`/dashboard/referential/${referentialId}`);
+    }
+
+    const onCreateVersion = async (version: ReferentialVersion) => {
+        const {success} = await createVersion(referentialId, version);
+        if (success) {
+            goto(`/dashboard/referential/${referentialId}`);
+        }
     }
 </script>
 
@@ -32,16 +36,12 @@
 </svelte:head>
 
 <div>
-    {#if version}
-        <h1 class="text-gradient">Référentiel {referential.label} - Version {version.version}</h1>
-        <Block>
-            <h2>Modifier</h2>
-            <hr class="hr-gradient col-12 mb20" />
-            <VersionForm referentialId="{referentialId}" version="{version}" onCancel={onCancel} />
-        </Block>
-    {:else}
-        Loading...
-    {/if}
+    <h1 class="text-gradient">Référentiel {referential?.label}</h1>
+    <Block>
+        <h2>Nouvelle version</h2>
+        <hr class="hr-gradient col-12 mb20" />
+        <VersionForm referentialId={referentialId} onCancel={onCancel} handleSubmitForm={onCreateVersion} />
+    </Block>
 </div>
 
 <style>

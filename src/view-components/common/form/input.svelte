@@ -33,6 +33,10 @@
         color: var(--primary);
     }
 
+    .secondary {
+        color: var(--secondary);
+    }
+
     .form-control {
         margin-bottom: 1.5rem;
         background-color: transparent;
@@ -46,6 +50,30 @@
         line-height: 1.4rem;
         vertical-align: top;
         margin-left: 5px;
+    }
+
+    input:-webkit-autofill.text-light,
+    input:-webkit-autofill:hover.text-light,
+    input:-webkit-autofill:focus.text-light,
+    input:-webkit-autofill:active.text-light {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: var(--text-light);
+    }
+
+    input:-webkit-autofill.primary,
+    input:-webkit-autofill:hover.primary,
+    input:-webkit-autofill:focus.primary,
+    input:-webkit-autofill:active.primary {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: var(--primary);
+    }
+
+    input:-webkit-autofill.secondary,
+    input:-webkit-autofill:hover.secondary,
+    input:-webkit-autofill:focus.secondary,
+    input:-webkit-autofill:active.secondary {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: var(--secondary);
     }
 
     input {
@@ -73,5 +101,9 @@
 
     .border-primary {
         border: 1px solid var(--primary);
+    }
+
+    .border-secondary {
+        border: 1px solid var(--secondary);
     }
 </style>

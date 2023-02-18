@@ -13,6 +13,7 @@
         --text-light: #FFFFFF;
         --text-dark: #191B20;
         --danger: #F64C70;
+        --warning: #f8d612;
 
         --bs-gray-100: #f8f9fa;
         --bs-gray-200: #e9ecef;
@@ -41,7 +42,7 @@
     }
 
     :global(.text-gradient) {
-        background: linear-gradient(to right, var(--text-light) 0%, var(--secondary) 65%);
+        background: linear-gradient(to right, var(--secondary) 0%, var(--secondary2) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -162,5 +163,13 @@
     :global(.col-1) {
         flex: 0 0 auto;
         width: 8.33%;
+    }
+
+    :global(::-webkit-scrollbar-track) {
+        background: var(--background);
+    }
+
+    :global(::-webkit-scrollbar-thumb) {
+        background: var(--primary);
     }
 </style>

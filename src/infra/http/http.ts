@@ -7,7 +7,7 @@ export class Http {
     ) {}
 
     async onResponse(response: Response) {
-        if (response.status === 401) {
+        if (response.status === 401 && typeof localStorage !== 'undefined') {
             localStorage.removeItem('token');
             goto('/auth/login');
         }
@@ -100,7 +100,7 @@ export class Http {
 
     getDefaultHeaders(): HeadersInit | undefined {
         const headers: HeadersInit | undefined = this.defaultRequest ? this.defaultRequest?.headers : {};
-        if (localStorage.getItem('token')) {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('token')) {
             if (headers) {
                 Object.assign(headers, {
                     Authorization: `Bearer ${localStorage.getItem('token')}`

@@ -1,9 +1,10 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import { registration, apiError } from '../../../libs/store/account.store';
-    import Input from '../../../libs/components/common/form/input.svelte';
-    import OutlinedButton from '../../../libs/components/common/button/outlined-button.svelte';
-    import Block from '../../../libs/components/common/block.svelte';
+    import { apiError } from '../../../infra/store/account.store';
+    import Input from '../../../view-components/common/form/input.svelte';
+    import OutlinedButton from '../../../view-components/common/button/outlined-button.svelte';
+    import Block from '../../../view-components/common/block.svelte';
+    import {registration} from '../../../app/actions';
 
     let email;
     let password;
@@ -42,7 +43,7 @@
 <style>
     .container {
         margin: 0 auto;
-        min-height: 100vh;
+        height: 100vh;
         max-width: 75%;
     }
 

@@ -6,13 +6,19 @@ export enum ReferentialSyncModeEnum {
     API = 'API',
 }
 
+export enum ReferentialVersionStatusEnum {
+    Draft = 'Draft',
+    Published = 'Published',
+    Archived = 'Archived',
+}
+
 export interface ReferentialVersionInterface {
     id?: string;
     url?: string;
     version?: string;
     updatedAt?: Date;
+    status?: ReferentialVersionStatusEnum;
     syncMode?: ReferentialSyncModeEnum;
-    versionInUrl?: boolean;
     dataMapping?: DataMappingInterface;
     referentialId: string;
 }
@@ -23,9 +29,9 @@ export class ReferentialVersion implements ReferentialVersionInterface {
         public id?: string,
         public url?: string,
         public version?: string,
+        public status?: ReferentialVersionStatusEnum,
         public updatedAt?: Date,
         public syncMode?: ReferentialSyncModeEnum,
-        public versionInUrl?: boolean,
         public dataMapping?: DataMappingInterface,
     ) {}
 
@@ -35,10 +41,29 @@ export class ReferentialVersion implements ReferentialVersionInterface {
             data.id,
             data.url,
             data.version,
+            data.status,
             data.updatedAt,
             data.syncMode,
-            data.versionInUrl,
             DataMapping.fromPayload(data.dataMapping || {}),
         )
+    }
+
+    public getPayload() {
+        return {
+            url: this.status,
+            version: this.version,
+            syncMode: this.syncMode,
+            dataMapping: this.syncMode === ReferentialSyncModeEnum.API ?
+                {
+                    referentialCriteria: this.dataMapping?.referentialCriteria,
+                    identifier: this.dataMapping?.identifier,
+                    label: this.dataMapping?.label,
+                    category: this.dataMapping?.category,
+                    description: this.dataMapping?.description,
+                    implement: this.dataMapping?.implement,
+                    control: this.dataMapping?.control,
+                } :
+                null,
+        }
     }
 }

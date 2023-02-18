@@ -1,4 +1,4 @@
-import { Http } from '../libs/http/http';
+import { Http } from './http';
 
 export function getHttpClient(): Http {
     let apiUrl;

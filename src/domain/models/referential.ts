@@ -1,4 +1,4 @@
-import type {ReferentialVersion} from './referential-version';
+import type {ReferentialVersionInterface} from './referential-version';
 
 export interface ReferentialInterface {
     id?: string | null;
@@ -8,7 +8,7 @@ export interface ReferentialInterface {
     ownerId?: string;
     description: string | null;
     updatedAt?: Date;
-    versions?: ReferentialVersion[];
+    versions?: ReferentialVersionInterface[];
 }
 
 export class Referential implements ReferentialInterface {
@@ -20,7 +20,7 @@ export class Referential implements ReferentialInterface {
         public isPublic: boolean = true,
         public ownerId?: string,
         public updatedAt?: Date,
-        public versions?: ReferentialVersion[],
+        public versions?: ReferentialVersionInterface[],
     ) {}
 
     public static fromPayload(data: ReferentialInterface) {

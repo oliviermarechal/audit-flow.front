@@ -3,8 +3,9 @@
     import Checkbox from '../common/form/checkbox.svelte';
     import Button from '../common/button/outlined-button.svelte';
     import {goto} from '$app/navigation';
-    import {Referential} from '../../../domain/models';
-    import {apiError, CreateReferential} from '../../store/referential.store';
+    import {Referential} from '../../domain';
+    import {apiError} from '../../infra/store/referential.store';
+    import {createReferential} from '../../app/actions';
 
     export let referential: Referential = new Referential('', '');
     export let showCancel = true;
@@ -24,7 +25,7 @@
             const isEdit = referential.hasId();
             let saved: Referential | void;
             if (!isEdit) {
-                saved = await CreateReferential(referential);
+                saved = await createReferential(referential);
             } else {
                 console.log(referential);
             }

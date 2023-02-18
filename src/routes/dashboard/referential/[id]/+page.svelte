@@ -1,28 +1,37 @@
 <script lang="ts">
     import { page } from '$app/stores';
-    import { onMount } from 'svelte';
-    import {FetchReferentials, referentials} from '../../../../libs/store/referential.store';
-    import Block from '../../../../libs/components/common/block.svelte';
-    import ReferentialForm from '../../../../libs/components/referential/referential-form.svelte';
-    import VersionEmbed from '../../../../libs/components/referential/version/version-embed.svelte';
-    import {Referential} from '../../../../domain/models';
+    import {referentials} from '../../../../infra/store/referential.store';
+    import Block from '../../../../view-components/common/block.svelte';
+    import ReferentialForm from '../../../../view-components/referential/referential-form.svelte';
+    import VersionEmbed from '../../../../view-components/referential/version/version-embed.svelte';
+    import {Referential, ReferentialVersionStatusEnum} from '../../../../domain';
+    import OutlinedButton from '../../../../view-components/common/button/outlined-button.svelte';
+    import {goto} from '$app/navigation';
+    import {fetchReferentials} from '../../../../app/actions';
 
-    let open;
-    let referential;
-    onMount(async () => {
-        referential = $referentials.find(f => f.id === $page.params.id);
-        if (!referential) {
-            await FetchReferentials();
-            referential = $referentials.find(f => f.id === $page.params.id);
+    $: referential = $referentials.find(f => f.id === $page.params.id);
+    if (!referential) {
+        fetchReferentials();
+    }
+
+    $: filteredVersions = () => {
+        if (referential) {
+            return referential.versions?.filter(v => {
+                if (displayArchived) {
+                    return v.status === ReferentialVersionStatusEnum.Archived;
+                } else {
+                    return v.status !== ReferentialVersionStatusEnum.Archived;
+                }
+            })
         }
-    });
 
-    // Version data
-    // version
-    // syncMode
-    // url
-    // versionInUrl
-    // referentialId
+        return [];
+    }
+
+    $: displayArchived = false;
+    const addVersion = () => {
+        goto(`/dashboard/referential/${$page.params.id}/version/add`);
+    }
 </script>
 
 <svelte:head>
@@ -41,15 +50,22 @@
             <Block width="col-6">
                 <h2 class="color-grey ref-title">Versions</h2>
                 <hr class="hr-gradient col-12 mb20" />
+
+                <OutlinedButton color="primary" on:click={() => displayArchived = !displayArchived}>{displayArchived ? 'Retour' : 'Voir les archives'}</OutlinedButton>
                 <div>
-                    {#each referential?.versions as version}
-                        <VersionEmbed version={version} />
-                    {/each}
+                    {#if filteredVersions().length > 0}
+                        {#each filteredVersions() as version}
+                            <VersionEmbed version={version} />
+                        {/each}
+                    {:else}
+                        <div>Aucune version</div>
+                    {/if}
+                    <OutlinedButton on:click={addVersion} color="primary">Ajouter</OutlinedButton>
                 </div>
             </Block>
         </div>
     {:else}
-        <div>Loading ... TODO Loader</div>
+        <div>Loading ...</div>
     {/if}
 </div>
 
