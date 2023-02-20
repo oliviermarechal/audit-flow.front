@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {ReferentialVersion} from "../../../domain/models";
+    import {ReferentialVersion} from '../../../domain/models';
 
     export let version: ReferentialVersion;
     export let firstRow: unknown;
@@ -67,32 +67,6 @@
             <div> >
                 <span class="terminal-tab terminal-error">
                             Description: {version.dataMapping.description || ''} ne donne rien
-                        </span>
-            </div>
-        {/if}
-        {#if firstRow[version.dataMapping.implement] !== undefined}
-            <div> >
-                <span class="terminal-tab">
-                            Implémentation: {concatIfTooLong(firstRow[version.dataMapping.implement])}
-                        </span>
-            </div>
-        {:else}
-            <div> >
-                <span class="terminal-tab terminal-warning">
-                            Implémentation: {version.dataMapping.implement || ''} ne donne rien
-                        </span>
-            </div>
-        {/if}
-        {#if firstRow[version.dataMapping.control] !== undefined}
-            <div> >
-                <span class="terminal-tab">
-                            Contrôle: {concatIfTooLong(firstRow[version.dataMapping.control])}
-                        </span>
-            </div>
-        {:else}
-            <div> >
-                <span class="terminal-tab terminal-warning">
-                            Contrôle: {version.dataMapping.control || ''} ne donne rien
                         </span>
             </div>
         {/if}

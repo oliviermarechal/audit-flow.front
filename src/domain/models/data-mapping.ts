@@ -4,8 +4,6 @@ export interface DataMappingInterface {
     label?: string;
     category?: string;
     description?: string;
-    implement?: string;
-    control?: string;
 }
 
 export class DataMapping implements DataMappingInterface {
@@ -15,8 +13,6 @@ export class DataMapping implements DataMappingInterface {
         public label?: string,
         public category?: string,
         public description?: string,
-        public implement?: string,
-        public control?: string,
     ) {}
 
     public static fromPayload(data: DataMappingInterface) {
@@ -26,8 +22,6 @@ export class DataMapping implements DataMappingInterface {
             data.label,
             data.category,
             data.description,
-            data.implement,
-            data.control,
         )
     }
 }

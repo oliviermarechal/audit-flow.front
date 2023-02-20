@@ -14,8 +14,6 @@
         {key: 'label', label: 'Label'},
         {key: 'category', label: 'Catégorie'},
         {key: 'description', label: 'Description'},
-        {key: 'implement', label: 'Implémentation'},
-        {key: 'control', label: 'Contrôle'},
     ];
 
     $: if (version.dataMapping?.referentialCriteria && referentialData) {
@@ -71,6 +69,7 @@
                 Changer de clé JSON pour les critères
             </OutlinedButton>
             <div class="col-12 flex flex-wrap mt-15">
+                <div class="col-12"><h3>Mapping des données reçus de l'API</h3></div>
                 {#each mappingOptions as option}
                     <div class="col-3">
                         <Select key="{getUniqueKey(option.key)}" fullWidth label="{option.label}" color="text-light"

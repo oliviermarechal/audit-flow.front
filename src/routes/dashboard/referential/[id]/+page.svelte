@@ -16,12 +16,16 @@
 
     $: filteredVersions = () => {
         if (referential) {
-            return referential.versions?.filter(v => {
+            const filtered = referential.versions?.filter(v => {
                 if (displayArchived) {
                     return v.status === ReferentialVersionStatusEnum.Archived;
                 } else {
                     return v.status !== ReferentialVersionStatusEnum.Archived;
                 }
+            });
+
+            return filtered.sort((a, b) => {
+                return new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? -1 : +1;
             })
         }
 

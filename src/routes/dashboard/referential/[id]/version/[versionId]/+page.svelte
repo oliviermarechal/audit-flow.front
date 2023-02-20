@@ -5,7 +5,8 @@
     import VersionForm from '../../../../../../view-components/referential/version/version-form.svelte';
     import Block from '../../../../../../view-components/common/block.svelte';
     import {goto} from '$app/navigation';
-    import {fetchReferentials} from '../../../../../../app/actions';
+    import {fetchReferentials, updateVersion} from '../../../../../../app/actions';
+    import {ReferentialVersion} from '../../../../../../domain';
 
     let referentialId = $page.params.id;
     let versionId = $page.params.versionId;
@@ -19,11 +20,18 @@
             referential = $referentials.find(f => f.id === referentialId);
         }
 
-        version = referential.versions.find(v => v.id === versionId)
+        version = ReferentialVersion.fromPayload(referential.versions.find(v => v.id === versionId));
     });
 
     const onCancel = () => {
         goto(`/dashboard/referential/${referentialId}`);
+    }
+
+    const handleUpdateVersion = async (version: ReferentialVersion) => {
+        const result = await updateVersion(referentialId, version);
+        if (result.success) {
+            goto(`/dashboard/referential/${referentialId}`);
+        }
     }
 </script>
 
@@ -37,7 +45,7 @@
         <Block>
             <h2>Modifier</h2>
             <hr class="hr-gradient col-12 mb20" />
-            <VersionForm referentialId="{referentialId}" version="{version}" onCancel={onCancel} />
+            <VersionForm referentialId="{referentialId}" version="{version}" onCancel={onCancel} handleSubmitForm={handleUpdateVersion} />
         </Block>
     {:else}
         Loading...

@@ -16,7 +16,8 @@ export interface ReferentialVersionInterface {
     id?: string;
     url?: string;
     version?: string;
-    updatedAt?: Date;
+    updatedAt?: string;
+    createdAt?: string;
     status?: ReferentialVersionStatusEnum;
     syncMode?: ReferentialSyncModeEnum;
     dataMapping?: DataMappingInterface;
@@ -30,7 +31,8 @@ export class ReferentialVersion implements ReferentialVersionInterface {
         public url?: string,
         public version?: string,
         public status?: ReferentialVersionStatusEnum,
-        public updatedAt?: Date,
+        public createdAt?: string,
+        public updatedAt?: string,
         public syncMode?: ReferentialSyncModeEnum,
         public dataMapping?: DataMappingInterface,
     ) {}
@@ -42,6 +44,7 @@ export class ReferentialVersion implements ReferentialVersionInterface {
             data.url,
             data.version,
             data.status,
+            data.createdAt,
             data.updatedAt,
             data.syncMode,
             DataMapping.fromPayload(data.dataMapping || {}),
@@ -50,7 +53,7 @@ export class ReferentialVersion implements ReferentialVersionInterface {
 
     public getPayload() {
         return {
-            url: this.status,
+            url: this.url,
             version: this.version,
             syncMode: this.syncMode,
             dataMapping: this.syncMode === ReferentialSyncModeEnum.API ?
@@ -60,8 +63,6 @@ export class ReferentialVersion implements ReferentialVersionInterface {
                     label: this.dataMapping?.label,
                     category: this.dataMapping?.category,
                     description: this.dataMapping?.description,
-                    implement: this.dataMapping?.implement,
-                    control: this.dataMapping?.control,
                 } :
                 null,
         }

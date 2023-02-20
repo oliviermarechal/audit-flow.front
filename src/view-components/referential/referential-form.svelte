@@ -5,7 +5,7 @@
     import {goto} from '$app/navigation';
     import {Referential} from '../../domain';
     import {apiError} from '../../infra/store/referential.store';
-    import {createReferential} from '../../app/actions';
+    import {createReferential, updateReferential} from '../../app/actions';
 
     export let referential: Referential = new Referential('', '');
     export let showCancel = true;
@@ -27,7 +27,7 @@
             if (!isEdit) {
                 saved = await createReferential(referential);
             } else {
-                console.log(referential);
+                await updateReferential(referential);
             }
 
             if (!$apiError) {

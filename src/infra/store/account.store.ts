@@ -1,10 +1,7 @@
 import {writable} from 'svelte/store';
 import type {Writable} from 'svelte/store';
 import type {Account} from '../../domain';
-import {getHttpClient} from '../http/http-client';
 import type {AccountStoreInterface} from '../../domain/storage';
-
-const httpClient = getHttpClient();
 
 export const account = writable<Account | null>();
 export const apiError = writable<string | null>();

@@ -1,11 +1,9 @@
 <script lang="ts">
-    import {ReferentialSyncModeEnum} from '../../../domain/models';
-    import {ReferentialVersion} from '../../../domain/models/referential-version';
+    import {ReferentialVersion, ReferentialSyncModeEnum, DataMapping} from '../../../domain';
     import VersionMapper from './version-mapper.svelte';
     import Input from '../../common/form/input.svelte';
     import Select from '../../common/form/select.svelte';
     import OutlinedButton from '../../common/button/outlined-button.svelte';
-    import {DataMapping} from '../../../domain/models/data-mapping';
 
     export let referentialId: string;
     export let version: ReferentialVersion = ReferentialVersion.fromPayload({referentialId});

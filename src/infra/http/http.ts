@@ -1,6 +1,7 @@
 import {goto} from '$app/navigation';
+import type {HttpClientInterface} from '../../domain';
 
-export class Http {
+export class Http implements HttpClientInterface {
     constructor(
         private readonly baseUrl: string,
         private readonly defaultRequest?: RequestInit,
@@ -76,6 +77,34 @@ export class Http {
                 ...config,
                 method: 'PUT',
                 body: JSON.stringify(data),
+                headers: {
+                    ...this.getDefaultHeaders(),
+                    ...headers,
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            }
+        );
+
+        await this.onResponse(response);
+
+        return response;
+    }
+
+    async delete(url: string, data?: unknown, config?: RequestInit): Promise<Response> {
+        const headers = config?.headers;
+
+        if (headers) {
+            delete config.headers;
+        }
+
+        const response = await fetch(
+            this.baseUrl + url,
+            {
+                ...this.getDefaultConfig(),
+                ...config,
+                method: 'DELETE',
+                body: data ? JSON.stringify(data) : null,
                 headers: {
                     ...this.getDefaultHeaders(),
                     ...headers,

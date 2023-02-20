@@ -1,7 +1,6 @@
 import type {Writable} from 'svelte/store';
 import {writable} from 'svelte/store';
 import type {ReferentialInterface, ReferentialStoreInterface, ReferentialVersionInterface} from '../../domain';
-import {ReferentialVersionStatusEnum} from '../../domain';
 
 export const referentials = writable<ReferentialInterface[]>([]);
 export const apiError = writable<string | undefined>();
@@ -14,6 +13,15 @@ class ReferentialStore implements ReferentialStoreInterface {
 
     async setReferentials(referentials: ReferentialInterface[]) {
         await this.referentialWritable.set(referentials);
+    }
+
+    async updateReferential(referential: ReferentialInterface): Promise<void> {
+        await this.referentialWritable.update(referentials => {
+            return [
+                ...referentials.filter(r => r.id !== referential.id),
+                referential,
+            ]
+        })
     }
 
     async addReferential(referential: ReferentialInterface) {
