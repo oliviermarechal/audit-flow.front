@@ -1,26 +1,45 @@
 <script lang="ts">
+	import {afterUpdate, onMount} from 'svelte';
+
 	export let color: string;
 	export let label: string;
 	export let key: string;
 	export let fullWidth: boolean;
 	export let width: string | undefined = undefined;
+	export let visible = true;
 	export let element: unknown;
+
+	let textareaEl;
+
+	$: if (visible && textareaEl) {
+		textareaEl.style.height = textareaEl.scrollHeight > 0 ? (textareaEl.scrollHeight + 5) + 'px' : '40px';
+	}
+
+	onMount(() => {
+		textareaEl.style.height = textareaEl.scrollHeight > 0 ? (textareaEl.scrollHeight + 5) + 'px' : '40px';
+	})
+
+	afterUpdate(() => {
+		textareaEl.style.height = textareaEl.scrollHeight > 0 ? (textareaEl.scrollHeight + 5) + 'px' : '40px';
+	})
+
 </script>
 
 <div class="form-control">
 	<label for="id-{key}">{label}</label>
-	<input
+	<textarea
 		id="id-{key}"
 		class="border-{color} {color} {fullWidth === true ? 'fullWidth' : width}"
 		{...$$restProps}
 		on:blur
 		on:focus
 		bind:value={element}
-	/>
+		bind:this={textareaEl}
+	></textarea>
 </div>
 
 <style>
-	input.fullWidth {
+	textarea.fullWidth {
 		width: 100%;
 		box-sizing: border-box;
 	}
@@ -52,31 +71,31 @@
 		margin-left: 5px;
 	}
 
-	input:-webkit-autofill.text-light,
-	input:-webkit-autofill:hover.text-light,
-	input:-webkit-autofill:focus.text-light,
-	input:-webkit-autofill:active.text-light {
+	textarea:-webkit-autofill.text-light,
+	textarea:-webkit-autofill:hover.text-light,
+	textarea:-webkit-autofill:focus.text-light,
+	textarea:-webkit-autofill:active.text-light {
 		transition: background-color 5000s ease-in-out 0s;
 		-webkit-text-fill-color: var(--text-light);
 	}
 
-	input:-webkit-autofill.primary,
-	input:-webkit-autofill:hover.primary,
-	input:-webkit-autofill:focus.primary,
-	input:-webkit-autofill:active.primary {
+	textarea:-webkit-autofill.primary,
+	textarea:-webkit-autofill:hover.primary,
+	textarea:-webkit-autofill:focus.primary,
+	textarea:-webkit-autofill:active.primary {
 		transition: background-color 5000s ease-in-out 0s;
 		-webkit-text-fill-color: var(--primary);
 	}
 
-	input:-webkit-autofill.secondary,
-	input:-webkit-autofill:hover.secondary,
-	input:-webkit-autofill:focus.secondary,
-	input:-webkit-autofill:active.secondary {
+	textarea:-webkit-autofill.secondary,
+	textarea:-webkit-autofill:hover.secondary,
+	textarea:-webkit-autofill:focus.secondary,
+	textarea:-webkit-autofill:active.secondary {
 		transition: background-color 5000s ease-in-out 0s;
 		-webkit-text-fill-color: var(--secondary);
 	}
 
-	input {
+	textarea {
 		font-weight: 400;
 		font-size: 0.875rem;
 		border-radius: 4px;
