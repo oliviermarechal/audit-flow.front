@@ -1,4 +1,4 @@
-import type { Criteria } from '../models';
+import type { Criteria } from '../models/referential';
 
 export interface CriteriaStoreInterface {
 	setCriteriaForVersion(versionId: string, newCriteria: Criteria[]): Promise<void>;

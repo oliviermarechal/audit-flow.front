@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ReferentialVersion } from '../../../domain/models';
+	import { ReferentialVersion } from '../../../domain/models/referential';
 
 	export let version: ReferentialVersion;
 	export let firstRow: unknown;

@@ -4,8 +4,8 @@
 	:global(:root) {
 		--dark: #06111b;
 		--background-black: #191b20;
-		--background: #16151a;
-		--background-card: #212227;
+		--background: #000;
+		--background-card: #181c2a;
 		--primary: #8181db;
 		--secondary: #4bd2bc;
 		--secondary2: #74dccb;
@@ -189,5 +189,14 @@
     /* Handle on hover */
     :global(::-webkit-scrollbar-thumb:hover) {
         background: var(--primary);
+    }
+
+    :global(button.empty-style) {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        outline: inherit;
     }
 </style>

@@ -77,18 +77,7 @@
 				<div class="col-12"><h3>Mapping des données reçus de l'API</h3></div>
 				{#each mappingOptions as option}
 					<div class="col-3">
-						<Select
-							key={getUniqueKey(option.key)}
-							fullWidth
-							label={option.label}
-							color="text-light"
-							bind:element={version.dataMapping[option.key]}
-						>
-							<option value="">Aucun</option>
-							{#each Object.keys(firstRow) as keyFirstRow}
-								<option value={keyFirstRow}>{keyFirstRow}</option>
-							{/each}
-						</Select>
+						@
 					</div>
 				{/each}
 			</div>

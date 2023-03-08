@@ -1,4 +1,4 @@
-import type { ReferentialInterface, ReferentialVersionInterface } from '../models';
+import type { ReferentialInterface, ReferentialVersionInterface } from '../models/referential';
 
 export interface ReferentialStoreInterface {
 	setReferentials(referentials: ReferentialInterface[]): Promise<void>;

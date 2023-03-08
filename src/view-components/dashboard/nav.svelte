@@ -13,9 +13,7 @@
 		goto('/auth/login');
 	};
 
-	const isActive = (path: string) => {
-		return $page.url.pathname.startsWith(path);
-	};
+	$: currentPath = $page.url.pathname;
 </script>
 
 <nav>
@@ -24,12 +22,16 @@
 			<p class="text-gradient">Audit Flow</p>
 		</div>
 		<ul>
-			{#if isActive('/dashboard/referential')}
+			{#if currentPath.startsWith('/dashboard/referential')}
 				<li class="active"><a href="/dashboard/referential">Référentiel</a></li>
 			{:else}
-				<li>Référentiel</li>
+				<li><a href="/dashboard/referential">Référentiel</a></li>
 			{/if}
-			<li>Template</li>
+			{#if currentPath.startsWith('/dashboard/template')}
+				<li class="active"><a href="/dashboard/template">Template</a></li>
+			{:else}
+				<li><a href="/dashboard/template">Template</a></li>
+			{/if}
 			<li>Audit</li>
 		</ul>
 	</div>
@@ -39,6 +41,13 @@
 </nav>
 
 <style>
+	a {
+		width: 100%;
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+	}
+
 	nav {
 		height: 100vh;
 		width: 15%;
@@ -47,7 +56,6 @@
 		position: fixed;
 		flex-direction: column;
 		justify-content: space-between;
-		background-color: var(--background-card);
 	}
 
 	ul {
